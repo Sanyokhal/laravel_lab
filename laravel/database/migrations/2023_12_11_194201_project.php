@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->integer('mark_1');
             $table->integer('mark_2');
             $table->integer('mark_3');
+            $table->integer('creator_user_id');
         });
     }
 
