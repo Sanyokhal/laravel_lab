@@ -36,6 +36,13 @@ class ProjectsController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'username' => ['required','max:255'],
+            'price' => ['required', 'integer','min:1',],
+            'mark_1' => ['required', 'integer','min:1','digits_between: 1,5', 'max:5'],
+            'mark_2' => ['required', 'integer','min:1','digits_between: 1,5', 'max:5'],
+            'mark_3' => ['required', 'integer','min:1','digits_between: 1,5', 'max:5'],
+        ]);
         $user = Auth::user();
         Project::create(array_merge($request->all(), ['creator_user_id' => $user->id]));
         return redirect('/project')->with('success', 'Project created successfully');
@@ -65,6 +72,13 @@ class ProjectsController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'username' => ['required','max:255'],
+            'price' => ['required', 'integer','min:1',],
+            'mark_1' => ['required', 'integer','min:1','digits_between: 1,5', 'max:5'],
+            'mark_2' => ['required', 'integer','min:1','digits_between: 1,5', 'max:5'],
+            'mark_3' => ['required', 'integer','min:1','digits_between: 1,5', 'max:5'],
+        ]);
         $project = Project::findOrFail($id);
         $project->update($request->all());
         return redirect('/project/' . $project->id)->with('success', 'Project updated successfully!');
